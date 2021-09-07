@@ -1,16 +1,14 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_hub/db/sqflite_db.dart';
 import 'package:movie_hub/model/movie_model.dart';
-
 import 'movie_details.dart';
 
 class MovieItem extends StatefulWidget {
   // const MovieItem({ Key? key }) : super(key: key);
   final Movies? e;
-  int isfavv=0;
+  int isfavv = 0;
   final VoidCallback? refresh;
   MovieItem({required this.e, this.refresh});
 
@@ -23,7 +21,6 @@ class _MovieItemState extends State<MovieItem> {
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(widget.e!.id),
-      //background: Text("fffffffffffff"),
       background: Container(
         alignment: Alignment.centerRight,
         padding: EdgeInsets.all(25),
@@ -88,11 +85,13 @@ class _MovieItemState extends State<MovieItem> {
           Navigator.push(
               context,
               //MaterialPageRoute(builder: (context) => MovieDetails(widget.e.id)));
-              MaterialPageRoute(builder: (context) => MovieDetails(widget.e!.id))).then((value) {
-          // Future.delayed(Duration(milliseconds: 3000),(){
-          //
-          //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-          // });
+              MaterialPageRoute(
+                  builder: (context) => MovieDetails(widget.e!.id))).then(
+              (value) {
+            // Future.delayed(Duration(milliseconds: 3000),(){
+            //
+            //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+            // });
             //widget.onCountSelected!(); with null safety
             widget.refresh!();
           });
@@ -112,8 +111,8 @@ class _MovieItemState extends State<MovieItem> {
                         topLeft: Radius.circular(8),
                         topRight: Radius.circular(8)),
                     child: Hero(
-                      tag: widget.e!.id??'',
-                      child: Image.file(File(widget.e!.image??''),
+                      tag: widget.e!.id ?? '',
+                      child: Image.file(File(widget.e!.image ?? ''),
                           height: 150,
                           width: double.infinity,
                           fit: BoxFit.cover),
@@ -150,7 +149,7 @@ class _MovieItemState extends State<MovieItem> {
                         children: [
                           //Text('Name: ' + widget.e.name),
                           Text(
-                            widget.e!.name??'no name',
+                            widget.e!.name ?? 'no name',
                             style: Theme.of(context).textTheme.headline6,
                           ),
 
@@ -159,7 +158,7 @@ class _MovieItemState extends State<MovieItem> {
                               Icon(Icons.category,
                                   color: Colors.green, size: 12),
                               SizedBox(width: 5),
-                              Text(widget.e!.category?? 'no category',
+                              Text(widget.e!.category ?? 'no category',
                                   style: Theme.of(context).textTheme.bodyText2),
                             ],
                           )
@@ -192,7 +191,7 @@ class _MovieItemState extends State<MovieItem> {
                             Text(
                                 DateFormat('MM, yyyy').format(
                                     DateTime.fromMillisecondsSinceEpoch(
-                                        widget.e!.releaseDate?? 0000)),
+                                        widget.e!.releaseDate ?? 0000)),
                                 style: Theme.of(context).textTheme.bodyText2),
                           ],
                         ),
